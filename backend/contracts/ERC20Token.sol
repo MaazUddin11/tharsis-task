@@ -1,3 +1,4 @@
+// Taken from https://solidity-by-example.org/app/erc20/
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
