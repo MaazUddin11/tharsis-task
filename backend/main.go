@@ -14,6 +14,8 @@ import (
 )
 
 func main() {
+	fmt.Println("Deploy and Interact with Evmos Contract")
+
 	// Initialize ethclient to be Evmos local network
 	client, err := ethclient.Dial("http://localhost:8545")
 	if err != nil {
@@ -26,7 +28,7 @@ func main() {
 		log.Fatal("Unable to retrieve private key from Env Var: %s", err)
 	}
 
-	// Get public ket from private key and cast to ECDSA
+	// Get public key from private key and cast to ECDSA
 	publicKey := privateKey.Public()
 	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
 	if !ok {
@@ -55,14 +57,13 @@ func main() {
 
 	// Deploy Token.sol contract
 	address, tx, instance, err := DeployToken(auth, client)
-
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	fmt.Println("Successfully deployed contract")
-	fmt.Println(address.Hex())
-	fmt.Println(tx.Hash().Hex())
+	fmt.Println("Contract Address: ", address.Hex())
+	fmt.Println("Transaction Hash: ", tx.Hash().Hex())
 
 	_ = instance
 }
